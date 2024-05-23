@@ -11,17 +11,16 @@ const flipCard = () => {
 <template>
   <div class="flip-card">
     <div :class="['flip-card-inner', { flipped: isFlipped }]">
-      <div class="flip-card-front" @click="flipCard">
+      <div class="flip-card-front">
         <p class="title">FLIP CARD</p>
         <p>Click Plus or Minus</p>
-        <div class="corner plus">+</div>
-        <div class="corner minus">-</div>
+        <div @click="flipCard" class="corner plus">+</div>
+        <div @click="flipCard" class="corner minus">-</div>
       </div>
-      <div class="flip-card-back" @click="flipCard">
+      <div class="flip-card-back" >
         <p class="title">BACK</p>
         <p>Click Plus or Minus</p>
-        <div class="corner plus">+</div>
-        <div class="corner minus">-</div>
+
       </div>
     </div>
   </div>
