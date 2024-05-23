@@ -1,9 +1,9 @@
 <script setup>
-
+import CardComponent from "./CardComponent.vue";
 </script>
 
 <template>
-  <div class="box"> Привет Дима</div>
+  <card-component></card-component>
 </template>
 
 <style scoped>
