@@ -2,8 +2,8 @@
 import {ref} from 'vue';
 
 const isFlipped = ref(false);
-const answer = 'answer'
-const question = 'question'
+const answer = 'answer ';
+const question = 'question';
 const flipCard = () => {
   isFlipped.value = !isFlipped.value;
 };
@@ -14,14 +14,13 @@ const flipCard = () => {
     <div :class="['flip-card-inner', { flipped: isFlipped }]">
       <div class="flip-card-front">
         <p class="title">Вопрос</p>
-        <p>{{question}}</p>
+        <p class="content">{{ question }}</p>
         <div @click="flipCard" class="corner plus">+</div>
         <div @click="flipCard" class="corner minus">-</div>
       </div>
       <div class="flip-card-back">
         <p class="title">Ответ</p>
-        <p>{{answer}}</p>
-
+        <p class="content">{{ answer }}</p>
       </div>
     </div>
   </div>
@@ -71,6 +70,8 @@ const flipCard = () => {
   backface-visibility: hidden;
   border: 1px solid coral;
   border-radius: 1rem;
+  padding: 10px; /* Add padding to avoid overflow */
+  box-sizing: border-box; /* Ensure padding is included in the total width and height */
 }
 
 .flip-card-front {
@@ -94,6 +95,35 @@ const flipCard = () => {
   );
   color: white;
   transform: rotateY(180deg);
+}
+
+.content {
+  height: 150px; /* Set a fixed height */
+  overflow-y: auto; /* Add scroll bar if content overflows vertically */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  width: 100%; /* Ensure the content doesn't overflow horizontally */
+  box-sizing: border-box; /* Ensure padding is included in the total width */
+  word-wrap: break-word; /* Break long words to fit the width */
+}
+
+.content::-webkit-scrollbar {
+  width: 4px; /* Thin scrollbar */
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: coral; /* Coral color for the scrollbar thumb */
+  border-radius: 2px; /* Round edges for the scrollbar thumb */
+}
+
+.content::-webkit-scrollbar-track {
+  background: #f2f2f2; /* Light background for the scrollbar track */
+  border-radius: 2px; /* Round edges for the scrollbar track */
+}
+
+/* Firefox scrollbar styles */
+.content {
+  scrollbar-width: thin;
+  scrollbar-color: coral #f2f2f2;
 }
 
 .corner {

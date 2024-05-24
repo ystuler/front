@@ -1,6 +1,6 @@
 <script setup>
-const description = 'Описание карточки тутутутутутуту ...............'
-const name = 'Название'
+const description = 'Описание карточки тутутутутутуту ............... Описание карточки тутутутутутуту ............... Описание карточки тутутутутутуту ............... Описание карточки тутутутутутуту ............... Описание карточки тутутутутутуту ...............';
+const name = 'Название';
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const name = 'Название'
 
     <div class="card__content">
       <p class="card__title">{{ name }}</p>
-      <p class="card__description">{{ description }}</p>
+      <div class="card__description">{{ description }}</div>
       <div class="card__buttons">
         <button class="card__button">Изучить</button>
         <button class="card__button secondary">Удалить</button>
@@ -31,6 +31,7 @@ const name = 'Название'
   text-align: center;
   color: coral;
 }
+
 .card {
   position: relative;
   width: 350px;
@@ -112,6 +113,28 @@ const name = 'Название'
   margin: 10px 0;
   font-size: 1em;
   line-height: 1.4;
+  height: 80px; /* Set a fixed height */
+  overflow: auto; /* Add scroll bar if content overflows */
+}
+
+.card__description::-webkit-scrollbar {
+  width: 4px; /* Thin scrollbar */
+}
+
+.card__description::-webkit-scrollbar-thumb {
+  background: coral; /* Coral color for the scrollbar thumb */
+  border-radius: 2px; /* Round edges for the scrollbar thumb */
+}
+
+.card__description::-webkit-scrollbar-track {
+  background: #f2f2f2; /* Light background for the scrollbar track */
+  border-radius: 2px; /* Round edges for the scrollbar track */
+}
+
+/* Firefox scrollbar styles */
+.card__description {
+  scrollbar-width: thin;
+  scrollbar-color: coral #f2f2f2;
 }
 
 .card__buttons {
