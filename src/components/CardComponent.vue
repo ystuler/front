@@ -113,7 +113,7 @@ const flipCard = () => {
 .minus {
   bottom: 10px;
   right: 10px;
-  color: coral;
+  color: #ea4d14;
 }
 
 .plus:hover,
