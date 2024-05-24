@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 
 const isFlipped = ref(false);
-
+const answer = 'answer'
+const question = 'question'
 const flipCard = () => {
   isFlipped.value = !isFlipped.value;
 };
@@ -12,14 +13,14 @@ const flipCard = () => {
   <div class="flip-card">
     <div :class="['flip-card-inner', { flipped: isFlipped }]">
       <div class="flip-card-front">
-        <p class="title">FLIP CARD</p>
-        <p>Click Plus or Minus</p>
+        <p class="title">Вопрос</p>
+        <p>{{question}}</p>
         <div @click="flipCard" class="corner plus">+</div>
         <div @click="flipCard" class="corner minus">-</div>
       </div>
-      <div class="flip-card-back" >
-        <p class="title">BACK</p>
-        <p>Click Plus or Minus</p>
+      <div class="flip-card-back">
+        <p class="title">Ответ</p>
+        <p>{{answer}}</p>
 
       </div>
     </div>
@@ -74,22 +75,22 @@ const flipCard = () => {
 
 .flip-card-front {
   background: linear-gradient(
-    120deg,
-    bisque 60%,
-    rgb(255, 231, 222) 88%,
-    rgb(255, 211, 195) 40%,
-    rgba(255, 127, 80, 0.603) 48%
+      120deg,
+      bisque 60%,
+      rgb(255, 231, 222) 88%,
+      rgb(255, 211, 195) 40%,
+      rgba(255, 127, 80, 0.603) 48%
   );
   color: coral;
 }
 
 .flip-card-back {
   background: linear-gradient(
-    120deg,
-    rgb(255, 174, 145) 30%,
-    coral 88%,
-    bisque 40%,
-    rgb(255, 185, 160) 78%
+      120deg,
+      rgb(255, 174, 145) 30%,
+      coral 88%,
+      bisque 40%,
+      rgb(255, 185, 160) 78%
   );
   color: white;
   transform: rotateY(180deg);

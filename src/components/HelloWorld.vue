@@ -1,9 +1,10 @@
 <script setup>
 import CardComponent from "./CardComponent.vue";
+import FormComponent from "./FormComponent.vue";
 </script>
 
 <template>
-  <card-component></card-component>
+  <FormComponent></FormComponent>
 </template>
 
 <style scoped>
