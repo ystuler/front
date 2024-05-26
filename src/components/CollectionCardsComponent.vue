@@ -1,6 +1,10 @@
 <script setup>
-const description = 'Описание карточки тутутутутутуту ............... Описание карточки тутутутутутуту ............... Описание карточки тутутутутутуту ............... Описание карточки тутутутутутуту ............... Описание карточки тутутутутутуту ...............';
-const name = 'Название';
+
+
+const props = defineProps({
+  description: String,
+  name: String
+})
 </script>
 
 <template>
@@ -24,6 +28,8 @@ const name = 'Название';
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .card__name {
   margin: 10px 0 0;
   font-size: 1.5em;
@@ -34,7 +40,7 @@ const name = 'Название';
 
 .card {
   position: relative;
-  width: 350px;
+  width: 20vw;
   aspect-ratio: 16/9;
   background: linear-gradient(
       120deg,
@@ -113,8 +119,8 @@ const name = 'Название';
   margin: 10px 0;
   font-size: 1em;
   line-height: 1.4;
-  height: 80px; /* Set a fixed height */
-  overflow: auto; /* Add scroll bar if content overflows */
+  height: 100px;
+  overflow: auto;
 }
 
 .card__description::-webkit-scrollbar {
@@ -122,16 +128,15 @@ const name = 'Название';
 }
 
 .card__description::-webkit-scrollbar-thumb {
-  background: coral; /* Coral color for the scrollbar thumb */
-  border-radius: 2px; /* Round edges for the scrollbar thumb */
+  background: coral;
+  border-radius: 2px;
 }
 
 .card__description::-webkit-scrollbar-track {
-  background: #f2f2f2; /* Light background for the scrollbar track */
-  border-radius: 2px; /* Round edges for the scrollbar track */
+  background: #f2f2f2;
+  border-radius: 2px;
 }
 
-/* Firefox scrollbar styles */
 .card__description {
   scrollbar-width: thin;
   scrollbar-color: coral #f2f2f2;
@@ -141,6 +146,7 @@ const name = 'Название';
   display: flex;
   gap: 10px;
   margin-top: auto;
+
 }
 
 .card__button {
@@ -149,6 +155,8 @@ const name = 'Название';
   background: #ea4d14;
   border: none;
   color: white;
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  font-size: 0.6rem;
 }
 
 .secondary {

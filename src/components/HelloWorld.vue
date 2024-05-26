@@ -3,12 +3,14 @@ import CardComponent from "./CardComponent.vue";
 import FormComponent from "./FormComponent.vue";
 import CollectionCardsComponent from "./CollectionCardsComponent.vue";
 import CollectionCreateCardComponent from "./CollectionCreateCardComponent.vue";
+import BackGroundComponent from "./BackGroundComponent.vue";
 </script>
 
 <template>
   <div class="center-container">
-  <card-component answer="Ответ" question="Вопрос"></card-component>
+  <CollectionCardsComponent name="Вологин" description="тут все билеты по вологину"></CollectionCardsComponent>
   </div>
+  <back-ground-component></back-ground-component>
 </template>
 
 <style scoped>

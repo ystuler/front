@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(135deg, #009999 0%, #1D7373 50%, #5CCCCC 100%);
-  font-family: Arial, sans-serif;
+    font-family: 'Press Start 2P', Arial, sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(135deg, #009999 0%, #1D7373 50%, #5CCCCC 100%);
 }

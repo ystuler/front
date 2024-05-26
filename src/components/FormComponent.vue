@@ -24,6 +24,16 @@
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+.input-container input::placeholder {
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  font-size: 0.8rem;
+  color: coral;
+}
+.input-container input{
+    font-family: 'Press Start 2P', Arial, sans-serif;
+
+}
 .form-container {
   display: flex;
   justify-content: center;
@@ -48,7 +58,7 @@
 }
 
 .form-title {
-  font-size: 1.5em;
+  font-size: 1.3em;
   line-height: 1.75rem;
   font-weight: 900;
   text-align: center;
@@ -93,7 +103,10 @@
   width: 1rem;
   height: 1rem;
 }
+
 .submit {
+  font-family: 'Press Start 2P', Arial, sans-serif;
+
   display: block;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -101,7 +114,7 @@
   padding-right: 1.25rem;
   background-color: coral;
   color: #ffffff;
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   line-height: 1.25rem;
   font-weight: 500;
   width: 100%;

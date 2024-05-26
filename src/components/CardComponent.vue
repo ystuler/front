@@ -32,11 +32,12 @@ const flipCard = () => {
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .flip-card {
   background-color: transparent;
   width: 14vw;
   height: 16vw;
-  font-family: sans-serif;
   position: relative;
 }
 
