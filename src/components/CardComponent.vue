@@ -2,8 +2,11 @@
 import {ref} from 'vue';
 
 const isFlipped = ref(false);
-const answer = 'answer ';
-const question = 'question';
+const show = ref(false);
+const props = defineProps({
+  answer: String,
+  question: String
+})
 const flipCard = () => {
   isFlipped.value = !isFlipped.value;
 };
@@ -18,9 +21,11 @@ const flipCard = () => {
         <div @click="flipCard" class="corner plus">+</div>
         <div @click="flipCard" class="corner minus">-</div>
       </div>
-      <div class="flip-card-back">
+      <div class="flip-card-back" @mouseover="show = true" @mouseleave="show = false">
         <p class="title">Ответ</p>
         <p class="content">{{ answer }}</p>
+        <div v-show="show" class="corner arow"> ></div>
+
       </div>
     </div>
   </div>
@@ -29,15 +34,14 @@ const flipCard = () => {
 <style scoped>
 .flip-card {
   background-color: transparent;
-  width: 190px;
-  height: 254px;
-  perspective: 1000px;
+  width: 14vw;
+  height: 16vw;
   font-family: sans-serif;
   position: relative;
 }
 
 .title {
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: 900;
   text-align: center;
   margin: 0;
@@ -98,16 +102,16 @@ const flipCard = () => {
 }
 
 .content {
-  height: 150px; /* Set a fixed height */
-  overflow-y: auto; /* Add scroll bar if content overflows vertically */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  width: 100%; /* Ensure the content doesn't overflow horizontally */
-  box-sizing: border-box; /* Ensure padding is included in the total width */
-  word-wrap: break-word; /* Break long words to fit the width */
+  height: 10vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  word-wrap: break-word;
 }
 
 .content::-webkit-scrollbar {
-  width: 4px; /* Thin scrollbar */
+  width: 4px;
 }
 
 .content::-webkit-scrollbar-thumb {
@@ -150,4 +154,41 @@ const flipCard = () => {
 .minus:hover {
   color: darkorange;
 }
+
+.arow {
+  bottom: 1px;
+  right: 2px;
+  color: #d54b19;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.arow:hover {
+  color: #d17427;
+  animation: hoverPulse 0.6s infinite;
+}
+
+@keyframes hoverPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 </style>

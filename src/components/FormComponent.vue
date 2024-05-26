@@ -7,7 +7,7 @@
     <form class="form">
       <p class="form-title">Sign in to your account</p>
       <div class="input-container">
-        <input placeholder="Enter email" type="email">
+        <input placeholder="Enter name">
       </div>
       <div class="input-container">
         <input placeholder="Enter password" type="password">

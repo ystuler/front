@@ -6,18 +6,16 @@ import CollectionCreateCardComponent from "./CollectionCreateCardComponent.vue";
 </script>
 
 <template>
-  <card-component></card-component>
+  <div class="center-container">
+  <card-component answer="Ответ" question="Вопрос"></card-component>
+  </div>
 </template>
 
 <style scoped>
 .center-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  align-items: center;
+  display: flex;
   justify-content: center;
-  padding: 20px;
-  height: 100vh; /* Make sure it takes the full height of the viewport */
-  text-align: center;
+  align-items: center;
+  height: 100vh;
 }
 </style>
