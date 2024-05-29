@@ -4,13 +4,12 @@ import FormComponent from "./FormComponent.vue";
 import CollectionCardsComponent from "./CollectionCardsComponent.vue";
 import CollectionCreateCardComponent from "./CollectionCreateCardComponent.vue";
 import BackGroundComponent from "./BackGroundComponent.vue";
+import RegFormComponent from "./RegFormComponent.vue";
+import HeaderComponent from "./HeaderComponent.vue";
 </script>
 
 <template>
-  <div class="center-container">
-  <CollectionCardsComponent name="Вологин" description="тут все билеты по вологину"></CollectionCardsComponent>
-  </div>
-  <back-ground-component></back-ground-component>
+  <HeaderComponent></HeaderComponent>
 </template>
 
 <style scoped>
@@ -19,5 +18,9 @@ import BackGroundComponent from "./BackGroundComponent.vue";
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+}
+.margin{
+  margin: 20px;
 }
 </style>

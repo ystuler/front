@@ -5,7 +5,7 @@
 <template>
   <div class="form-container">
     <form class="form">
-      <p class="form-title">Sign in to your account</p>
+      <p class="form-title">Create your account</p>
       <div class="input-container">
         <input placeholder="Enter name">
       </div>
@@ -13,11 +13,11 @@
         <input placeholder="Enter password" type="password">
       </div>
       <button class="submit" type="submit">
-        Sign in
+        Sign up
       </button>
       <p class="signup-link">
-        No account?
-        <a href="/reg">Sign up</a>
+        Already have an account?
+        <a href="/login">Sign in</a>
       </p>
     </form>
   </div>
@@ -150,3 +150,4 @@
   color: darkorange;
 }
 </style>
+``
