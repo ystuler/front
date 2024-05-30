@@ -2,6 +2,8 @@
   <header class="header">
     <nav>
       <ul>
+        <li class="secret-button"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">SECRET BUTTON</a></li>
+        <li><a href="/collections">Выйти</a></li>
         <li><a href="/collections">Коллекции</a></li>
         <li><a href="/profile">Профиль</a></li>
       </ul>
@@ -40,6 +42,12 @@
   display: flex;
   justify-content: flex-end;
   margin-right: 20px;
+  position: relative;
+}
+
+.header nav ul .secret-button {
+  position: absolute;
+  left: 20px;
 }
 
 .header nav ul li {
