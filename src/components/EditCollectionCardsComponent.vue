@@ -1,46 +1,49 @@
+<script setup>
+import { ref, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router'; // Импортируем useRouter
+import { useCollectionStore } from '../Pinia/collectionStore.js';
+
+const router = useRouter();
+
+const collectionStore = useCollectionStore();
+const route = useRoute();
+const name = ref('');
+const description = ref('');
+
+const updateCollection = async () => {
+  const id = route.params.id;
+  await collectionStore.updateCollection(id, name.value, description.value);
+    router.push('/collections');
+
+};
+
+const isFormValid = computed(() => {
+  return name.value.trim() !== '' && description.value.trim() !== '';
+});
+</script>
+
 <template>
   <div class="form-container">
-    <form class="form" @submit.prevent="handleSubmit">
-      <p class="form-title">Создание коллекции</p>
+    <form class="form" @submit.prevent="updateCollection">
+      <p class="form-title">Редактирование коллекции</p>
       <div class="input-container">
-        <input v-model="title" placeholder="Название" />
+        <input v-model="name" placeholder="Название" />
       </div>
       <div class="input-container">
         <input v-model="description" placeholder="Описание" />
       </div>
       <button :disabled="!isFormValid" class="submit" type="submit">
-        Создать
+        Сохранить
       </button>
       <RouterLink to="/collections">
         <button class="submit">
-          К коллекциям
+          Отмена
         </button>
       </RouterLink>
     </form>
   </div>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue';
-import {useCollectionStore} from "../Pinia/collectionStore.js";
-
-const title = ref('');
-const description = ref('');
-
-const isFormValid = computed(() => {
-  return title.value.trim() !== '' && description.value.trim() !== '';
-});
-
-const collectionStore = useCollectionStore();
-
-const handleSubmit = async () => {
-  if (isFormValid.value) {
-    await collectionStore.createCollection(title.value, description.value);
-    title.value = '';
-    description.value = '';
-  }
-};
-</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');

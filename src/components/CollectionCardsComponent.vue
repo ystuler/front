@@ -1,11 +1,28 @@
 <script setup>
-
+import { useCollectionStore } from '../Pinia/collectionStore.js';
+import { useCardStore } from '../Pinia/cardStore.js';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
+  id: Number,
   description: String,
-  name: String
-})
+  name: String,
+});
 
+const collectionStore = useCollectionStore();
+const cardStore = useCardStore();
+const router = useRouter();
+
+const deleteCollection = async (id) => {
+  await collectionStore.deleteCollection(id);
+  location.reload();
+};
+
+const openCollection = async (id) => {
+  await cardStore.fetchCardsByCollectionID(id);
+  router.push(`/collections/${id}`);
+};
 </script>
 
 <template>
@@ -20,9 +37,9 @@ const props = defineProps({
       <p class="card__title">{{ name }}</p>
       <div class="card__description">{{ description }}</div>
       <div class="card__buttons">
-        <button class="card__button">Изучить</button>
-        <button class="card__button secondary">Удалить</button>
-        <button class="card__button secondary">Редактировать</button>
+        <button class="card__button" @click="openCollection(props.id)">Изучить</button>
+        <button class="card__button secondary" @click="deleteCollection(props.id)">Удалить</button>
+        <RouterLink :to="`/edit/${props.id}`" class="card__button secondary">Редактировать</RouterLink>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@ const flipCard = () => {
 </script>
 
 <template>
-  <RouterLink to="/createscard" class="flip-card">
+  <div class="flip-card">
     <div :class="['flip-card-inner', { flipped: isFlipped }]">
       <div class="flip-card-front">
         <svg class="card__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" id="plus">
@@ -20,7 +20,7 @@ const flipCard = () => {
         </svg>
       </div>
     </div>
-  </RouterLink>
+  </div>
 </template>
 
 <style scoped>

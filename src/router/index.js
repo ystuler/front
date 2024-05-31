@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 
 import HelloWorld from "../views/CardView.vue";
 import RegFormComponent from "../components/RegFormComponent.vue";
@@ -11,6 +11,10 @@ import NewCardComponent from "../components/Cards/NewCardComponent.vue";
 import SCardView from "../views/SCardView.vue";
 import CreateSCardView from "../views/CreateSCardView.vue";
 import CollectionNameCreateComponent from "../components/CollectionNameCreateComponent.vue";
+import EditCollectionCardsComponent from "../components/EditCollectionCardsComponent.vue";
+import CollectionCardsComponent from "../components/CollectionCardsComponent.vue";
+import UserComponent from "../components/UserComponent.vue"; // Импортируем компонент
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -24,7 +28,7 @@ const router = createRouter({
         },
         {
             path: '/',
-            component:LoginView
+            component: LoginView
         },
         {
             path: '/createcard',
@@ -41,9 +45,25 @@ const router = createRouter({
         {
             path: '/collectioncreateName',
             component: CollectionNameCreateComponent
+        },
+        {
+            path: '/edit/:id',
+            name: 'EditCollection',
+            component: EditCollectionCardsComponent,
+            props: true,
+        },
+        {
+            path: '/collections/:id',
+            name: 'CollectionCards',
+            component: SCardView,
+            props: true,
+        },{
+                    path: '/profile',
+            name: 'UserCollection',
+            component: UserComponent,
+            props: true,
         }
-
     ]
 })
 
-export default router
+export default router;

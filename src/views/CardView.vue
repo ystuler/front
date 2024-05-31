@@ -3,7 +3,7 @@
   <div class="wrapper">
     <div class="center-container">
       <div v-for="collection in collections" :key="collection.id">
-        <CollectionCardsComponent :name="collection.name" :description="collection.description"></CollectionCardsComponent>
+        <CollectionCardsComponent :id="collection.id" :name="collection.name" :description="collection.description"></CollectionCardsComponent>
       </div>
       <CollectionCreateCardComponent class="margin" @create="createCollection"></CollectionCreateCardComponent>
     </div>

@@ -1,17 +1,29 @@
 <script setup>
 import {ref} from 'vue';
+import {useCardStore} from "../../Pinia/cardStore.js";
 
 const isFlipped = ref(false);
 const show = ref(false);
 const edit = ref(true);
 
 const props = defineProps({
+  id: Number,
   answer: String,
   question: String,
-  edit: Boolean
-})
+  edit: Boolean,
+});
+
+const cardStore = useCardStore();
+
 const flipCard = () => {
   isFlipped.value = !isFlipped.value;
+};
+
+const deleteCard = async (id) => {
+  console.log(id)
+  await cardStore.deleteCard(id);
+    location.reload();
+
 };
 </script>
 
@@ -22,8 +34,8 @@ const flipCard = () => {
         <p class="title">Вопрос</p>
         <p class="content">{{ question }}</p>
         <div v-if="edit">
-          <div  class="corner2 plus2">Изм</div>
-          <div class="corner2 minus2">Удал</div>
+          <div class="corner2 plus2">Изм</div>
+          <div class="corner2 minus2" @click="deleteCard(props.id)">Удал</div>
         </div>
         <div v-else>
           <div @click="flipCard" class="corner plus">+</div>
@@ -34,7 +46,6 @@ const flipCard = () => {
         <p class="title">Ответ</p>
         <p class="content">{{ answer }}</p>
         <div v-show="show" class="corner arow"> ></div>
-
       </div>
     </div>
   </div>
@@ -147,13 +158,15 @@ const flipCard = () => {
   cursor: pointer;
   transition: color 0.3s;
 }
-.corner2{
-    position: absolute;
+
+.corner2 {
+  position: absolute;
   font-size: 1.5em;
   font-weight: bold;
   cursor: pointer;
   transition: color 0.3s;
 }
+
 .plus {
   bottom: 10px;
   left: 10px;
@@ -177,6 +190,7 @@ const flipCard = () => {
   right: 45px;
   color: #ea4d14;
 }
+
 .plus:hover,
 .minus:hover {
   color: darkorange;

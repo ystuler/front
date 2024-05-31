@@ -1,10 +1,38 @@
 <script setup>
-import { ref } from 'vue';
+import {ref, computed, watch} from 'vue';
+import {useCardStore} from "../../Pinia/cardStore.js";
 
 const isFlipped = ref(false);
 const show = ref(false);
 const userQuestion = ref('');
 const userAnswer = ref('');
+
+const props = defineProps({
+  collectionID: Number,
+});
+console.log('asdasdasdas', props.collectionID);
+const cardStore = useCardStore();
+watch(
+  () => props.collectionID,
+  (newVal) => {
+    console.log('asdasdasdas', newVal);
+  },
+  { immediate: true }
+);
+const isFormValid = computed(() => {
+  return userQuestion.value.trim() !== '' && userAnswer.value.trim() !== '';
+});
+
+const handleSubmit = async () => {
+  if (isFormValid.value) {
+    console.log('Creating card for collection ID:', props.collectionID);
+    await cardStore.createCard(props.collectionID, userQuestion.value, userAnswer.value);
+    userQuestion.value = '';
+    userAnswer.value = '';
+    isFlipped.value = false;
+  }
+};
+
 const flipCard = () => {
   isFlipped.value = !isFlipped.value;
 };
@@ -25,9 +53,9 @@ const flipCard = () => {
         <div v-show="show" class="corner arow">></div>
       </div>
     </div>
+    <button :disabled="!isFormValid" @click="handleSubmit" class="submit-button">Создать карточку</button>
   </div>
 </template>
-
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
@@ -206,11 +234,11 @@ const flipCard = () => {
 }
 
 .input-field::placeholder {
-  color: coral;
+  color: coral; /* Changed placeholder color to coral */
 }
 
 .orange-text {
-  color: coral !important;
+  color: coral !important; /* Ensures text is coral */
 }
 
 .white-text {

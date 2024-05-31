@@ -6,7 +6,6 @@ export const useUserStore = defineStore('user', {
     user: JSON.parse(localStorage.getItem('user')) || null,
     loading: false,
     error: null,
-    logoutTimer: null,
   }),
   actions: {
     async register(username, password) {
@@ -60,12 +59,78 @@ export const useUserStore = defineStore('user', {
       }
       console.log('User logged out.');
     },
+    async getProfile() {
+      this.loading = true;
+      this.error = null;
+
+      try {
+        const response = await axios.get('http://localhost:8000/profile', {
+          headers: {
+            Authorization: `Bearer ${this.user.token}`
+          }
+        });
+
+        this.user = { ...this.user, ...response.data };
+        localStorage.setItem('user', JSON.stringify(this.user));
+        console.log('Profile fetched successfully:', response.data);
+      } catch (error) {
+        this.error = error.response ? error.response.data : error.message;
+        console.log('Fetching profile failed:', this.error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    async updateUsername(newUsername) {
+      this.loading = true;
+      this.error = null;
+
+      try {
+        const response = await axios.put('http://localhost:8000/profile/username', {
+          username: newUsername
+        }, {
+          headers: {
+            Authorization: `Bearer ${this.user.token}`
+          }
+        });
+
+        this.user.username = newUsername;
+        localStorage.setItem('user', JSON.stringify(this.user));
+        console.log('Username updated successfully:', response.data);
+      } catch (error) {
+        this.error = error.response ? error.response.data : error.message;
+        console.log('Updating username failed:', this.error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    async updatePassword(oldPassword, newPassword) {
+      this.loading = true;
+      this.error = null;
+
+      try {
+        const response = await axios.put('http://localhost:8000/profile/password', {
+          old_password: oldPassword,
+          new_password: newPassword
+        }, {
+          headers: {
+            Authorization: `Bearer ${this.user.token}`
+          }
+        });
+
+        console.log('Password updated successfully:', response.data);
+      } catch (error) {
+        this.error = error.response ? error.response.data : error.message;
+        console.log('Updating password failed:', this.error);
+      } finally {
+        this.loading = false;
+      }
+    },
     startLogoutTimer() {
       if (this.logoutTimer) clearTimeout(this.logoutTimer);
 
       this.logoutTimer = setTimeout(() => {
         this.logout();
-      }, 300000);
+      }, 300000); // 5 minutes
     },
     resetLogoutTimer() {
       if (this.user) {
