@@ -3,15 +3,28 @@
     <nav>
       <ul>
         <li class="secret-button"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">SECRET BUTTON</a></li>
-        <li><a href="/collections">Выйти</a></li>
-        <li><a href="/collections">Коллекции</a></li>
-        <li><a href="/profile">Профиль</a></li>
+        <li v-if="isAuthenticated"><a @click.prevent="logout" href="#">Выйти</a></li>
+        <li><a :href="isAuthenticated ? '/collections' : '/'">Коллекции</a></li>
+        <li><a :href="isAuthenticated ? '/profile' : '/'">Профиль</a></li>
       </ul>
     </nav>
   </header>
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '../Pinia/authStore.js';
+
+const userStore = useUserStore();
+const router = useRouter();
+
+const isAuthenticated = computed(() => userStore.user !== null);
+
+const logout = async () => {
+  userStore.logout();
+  await router.push('/');
+};
 </script>
 
 <style scoped>

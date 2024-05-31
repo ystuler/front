@@ -1,16 +1,34 @@
 <script setup>
+import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '../Pinia/authStore.js';
 
+const username = ref('');
+const password = ref('');
+const userStore = useUserStore();
+const router = useRouter();
+
+const loginUser = async (event) => {
+  event.preventDefault();
+  await userStore.login(username.value, password.value);
+  if (userStore.user) {
+    console.log('Login successful:', userStore.user);
+    router.push('/collections');
+  } else {
+    console.log('Login failed:', userStore.error);
+  }
+};
 </script>
 
 <template>
   <div class="form-container">
-    <form class="form">
+    <form class="form" @submit="loginUser">
       <p class="form-title">Sign in to your account</p>
       <div class="input-container">
-        <input placeholder="Enter name">
+        <input placeholder="Enter name" v-model="username">
       </div>
       <div class="input-container">
-        <input placeholder="Enter password" type="password">
+        <input placeholder="Enter password" type="password" v-model="password">
       </div>
       <button class="submit" type="submit">
         Sign in
@@ -20,6 +38,8 @@
         <a href="/reg">Sign up</a>
       </p>
     </form>
+    <div v-if="userStore.loading">Logging in...</div>
+    <div v-if="userStore.error" style="color: red;">{{ userStore.error }}</div>
   </div>
 </template>
 
@@ -32,7 +52,6 @@
 }
 .input-container input{
     font-family: 'Press Start 2P', Arial, sans-serif;
-
 }
 .form-container {
   display: flex;
@@ -106,7 +125,6 @@
 
 .submit {
   font-family: 'Press Start 2P', Arial, sans-serif;
-
   display: block;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -132,7 +150,6 @@
 .submit:active {
   transform: scale(0.95);
 }
-
 
 .signup-link {
   color: rgb(255, 127, 80);

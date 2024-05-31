@@ -1,25 +1,20 @@
-<script setup>
-import CardComponent from "../components/Cards/CardComponent.vue";
-import FormComponent from "../components/FormComponent.vue";
-import CollectionCardsComponent from "../components/CollectionCardsComponent.vue";
-import CollectionCreateCardComponent from "../components/CollectionCreateCardComponent.vue";
-import BackGroundComponent from "../components/BackGroundComponent.vue";
-import RegFormComponent from "../components/RegFormComponent.vue";
-import HeaderComponent from "../components/HeaderComponent.vue";
-</script>
-
 <template>
   <HeaderComponent></HeaderComponent>
   <div class="wrapper">
     <div class="center-container">
-      <CollectionCardsComponent name="Вологин 1" description="тут вопросы по вологину бутут как то вот так"></CollectionCardsComponent>
-      <CollectionCardsComponent name="Вологин 1" description="тут вопросы по вологину бутут как то вот так"></CollectionCardsComponent>
-      <CollectionCardsComponent name="Вологин 1" description="тут вопросы по вологину бутут как то вот так"></CollectionCardsComponent>
+      <CollectionCardsComponent></CollectionCardsComponent>
       <CollectionCreateCardComponent class="margin"></CollectionCreateCardComponent>
     </div>
   </div>
   <BackGroundComponent></BackGroundComponent>
 </template>
+
+<script setup>
+import CollectionCardsComponent from "../components/CollectionCardsComponent.vue";
+import CollectionCreateCardComponent from "../components/CollectionCreateCardComponent.vue";
+import BackGroundComponent from "../components/BackGroundComponent.vue";
+import HeaderComponent from "../components/HeaderComponent.vue";
+</script>
 
 <style scoped>
 .wrapper {
@@ -38,6 +33,4 @@ import HeaderComponent from "../components/HeaderComponent.vue";
   align-items: center;
   padding: 16px;
 }
-
-
 </style>

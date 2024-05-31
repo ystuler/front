@@ -1,57 +1,48 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useUserStore } from "../Pinia/authStore.js";
+import {ref, computed} from 'vue';
 
-const username = ref('');
-const password = ref('');
-const userStore = useUserStore();
-const router = useRouter();
+const title = ref('');
+const description = ref('');
 
-const registerUser = async (event) => {
-  event.preventDefault();
-  await userStore.register(username.value, password.value);
-  if (!userStore.error) {
-    console.log('Registration successful');
-    router.push('/collections');
-  } else {
-    console.log('Registration failed');
-  }
-};
+const isFormValid = computed(() => {
+  return title.value.trim() !== '' && description.value.trim() !== '';
+});
 </script>
 
 <template>
-  <div class="form-container">
-    <form class="form" @submit="registerUser">
-      <p class="form-title">Create your account</p>
-      <div class="input-container">
-        <input placeholder="Enter name" v-model="username">
-      </div>
-      <div class="input-container">
-        <input placeholder="Enter password" type="password" v-model="password">
-      </div>
-      <button class="submit" type="submit">
-        Sign up
-      </button>
-      <p class="signup-link">
-        Already have an account?
-        <a href="/">Sign in</a>
-      </p>
-    </form>
 
+  <div class="form-container">
+    <form class="form">
+      <p class="form-title">Создание коллекции</p>
+      <div class="input-container">
+        <input v-model="title" placeholder="Название">
+      </div>
+      <div class="input-container">
+        <input v-model="description" placeholder="Описание">
+      </div>
+      <RouterLink to="/scards">
+        <button :disabled="!isFormValid" class="submit" type="submit">
+          Создать
+        </button>
+      </RouterLink>
+    </form>
   </div>
 </template>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .input-container input::placeholder {
   font-family: 'Press Start 2P', Arial, sans-serif;
   font-size: 0.8rem;
   color: coral;
 }
-.input-container input{
-    font-family: 'Press Start 2P', Arial, sans-serif;
+
+.input-container input {
+  font-family: 'Press Start 2P', Arial, sans-serif;
+
 }
+
 .form-container {
   display: flex;
   justify-content: center;
@@ -124,6 +115,7 @@ const registerUser = async (event) => {
 
 .submit {
   font-family: 'Press Start 2P', Arial, sans-serif;
+
   display: block;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -150,6 +142,7 @@ const registerUser = async (event) => {
   transform: scale(0.95);
 }
 
+
 .signup-link {
   color: rgb(255, 127, 80);
   font-size: 0.875rem;
@@ -166,3 +159,4 @@ const registerUser = async (event) => {
   color: darkorange;
 }
 </style>
+``

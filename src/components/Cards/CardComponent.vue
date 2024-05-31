@@ -3,9 +3,12 @@ import {ref} from 'vue';
 
 const isFlipped = ref(false);
 const show = ref(false);
+const edit = ref(true);
+
 const props = defineProps({
   answer: String,
-  question: String
+  question: String,
+  edit: Boolean
 })
 const flipCard = () => {
   isFlipped.value = !isFlipped.value;
@@ -18,8 +21,14 @@ const flipCard = () => {
       <div class="flip-card-front">
         <p class="title">Вопрос</p>
         <p class="content">{{ question }}</p>
-        <div @click="flipCard" class="corner plus">+</div>
-        <div @click="flipCard" class="corner minus">-</div>
+        <div v-if="edit">
+          <div  class="corner2 plus2">Изм</div>
+          <div class="corner2 minus2">Удал</div>
+        </div>
+        <div v-else>
+          <div @click="flipCard" class="corner plus">+</div>
+          <div @click="flipCard" class="corner minus">-</div>
+        </div>
       </div>
       <div class="flip-card-back" @mouseover="show = true" @mouseleave="show = false">
         <p class="title">Ответ</p>
@@ -138,7 +147,13 @@ const flipCard = () => {
   cursor: pointer;
   transition: color 0.3s;
 }
-
+.corner2{
+    position: absolute;
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
 .plus {
   bottom: 10px;
   left: 10px;
@@ -151,6 +166,17 @@ const flipCard = () => {
   color: #ea4d14;
 }
 
+.plus2 {
+  bottom: 10px;
+  left: 10px;
+  color: coral;
+}
+
+.minus2 {
+  bottom: 10px;
+  right: 45px;
+  color: #ea4d14;
+}
 .plus:hover,
 .minus:hover {
   color: darkorange;

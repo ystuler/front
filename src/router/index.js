@@ -7,11 +7,15 @@ import RegVIew from "../views/RegVIew.vue";
 import LoginView from "../views/LoginView.vue";
 import CardView from "../views/CardView.vue";
 import CreateCardComponent from "../components/Cards/CreateCardComponent.vue";
+import NewCardComponent from "../components/Cards/NewCardComponent.vue";
+import SCardView from "../views/SCardView.vue";
+import CreateSCardView from "../views/CreateSCardView.vue";
+import CollectionNameCreateComponent from "../components/CollectionNameCreateComponent.vue";
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
-            path: '/cards',
+            path: '/collections',
             component: CardView
         },
         {
@@ -19,12 +23,24 @@ const router = createRouter({
             component: RegVIew
         },
         {
-            path: '/login',
+            path: '/',
             component:LoginView
         },
         {
             path: '/createcard',
             component: CreateCardComponent
+        },
+        {
+            path: '/scards',
+            component: SCardView
+        },
+        {
+            path: '/createscard',
+            component: CreateSCardView
+        },
+        {
+            path: '/collectioncreateName',
+            component: CollectionNameCreateComponent
         }
 
     ]
