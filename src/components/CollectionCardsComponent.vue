@@ -1,79 +1,32 @@
+<script setup>
+
+
+const props = defineProps({
+  description: String,
+  name: String
+})
+
+</script>
+
 <template>
-  <div>
-    <div v-if="loading">Loading...</div>
-    <div v-if="error">{{ error }}</div>
-    <div v-else>
-      <div v-for="collection in collections" :key="collection.id" class="card">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-        </svg>
-        <p class="card__name">{{ collection.name }}</p>
-        <div class="card__content">
-          <p class="card__title">{{ collection.name }}</p>
-          <div class="card__description">{{ collection.description }}</div>
-          <div class="card__buttons">
-            <button class="card__button">Изучить</button>
-            <button class="card__button secondary">Удалить</button>
-            <button class="card__button secondary">Редактировать</button>
-          </div>
-        </div>
+  <div class="card">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path
+          d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
+    </svg>
+    <p class="card__name">{{ name }}</p>
+
+    <div class="card__content">
+      <p class="card__title">{{ name }}</p>
+      <div class="card__description">{{ description }}</div>
+      <div class="card__buttons">
+        <button class="card__button">Изучить</button>
+        <button class="card__button secondary">Удалить</button>
+        <button class="card__button secondary">Редактировать</button>
       </div>
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, onMounted, computed, watch } from 'vue';
-import { useCollectionStore } from '../Pinia/collectionStore.js';
-
-const collectionStore = useCollectionStore();
-const collections = ref([]);
-
-const extractCollections = (data) => {
-  if (Array.isArray(data)) {
-    return data;
-  } else if (typeof data === 'object' && data !== null) {
-    return data.items || data.collections || Object.values(data);
-  }
-  return [];
-};
-
-const logCollections = (collections) => {
-  console.log('Type of collections:', typeof collections);
-  console.log('Is collections an array?', Array.isArray(collections));
-  if (Array.isArray(collections)) {
-    collections.forEach(collection => {
-      console.log('Collection ID:', collection.id);
-      console.log('Collection Name:', collection.name);
-      console.log('Collection Description:', collection.description);
-    });
-  } else {
-    console.warn('Collections is not an array:', collections);
-  }
-};
-
-onMounted(async () => {
-  await collectionStore.fetchCollections();
-  collections.value = extractCollections(collectionStore.collections);
-  console.log('Initial collections:', collections.value);
-  logCollections(collections.value);
-});
-
-watch(() => collectionStore.collections, (newCollections) => {
-  collections.value = extractCollections(newCollections);
-  console.log('Updated collections:', collections.value);
-  logCollections(collections.value);
-});
-
-const loading = computed(() => collectionStore.loading);
-const error = computed(() => collectionStore.error);
-
-const createCollection = async (name, description) => {
-  await collectionStore.createCollection(name, description);
-};
-</script>
-
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -194,6 +147,7 @@ const createCollection = async (name, description) => {
   display: flex;
   gap: 10px;
   margin-top: auto;
+
 }
 
 .card__button {
